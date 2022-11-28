@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Add product -->
+    <div class='container mt-5'>
+        <div class='row justify-content-center'>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-success">
+                        <h4 class='text-center'>Order Info</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class='mt-5'>
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label>Product title</label>
+                                            <input type="text" id="text1" name='title' class='form-control' required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+
+                                        <div class="form-group mb-3">
+                                            <label>Price</label>
+                                            <input type="text" id="text2" name='price' class='form-control' required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <button type='button' value="submit" class='btn btn-success' onclick="myCreate()">Add</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- table -->
+    <div class='container py-5'>
+        <div class='row justify-content-center'>
+            <div class="col-md-8">
+                <div>
+                    <h4 class='text-center mb-4'>Product List</h4>
+                    <table class="table table-bordered" id="my-table">
+                        <thead>
+                            <tr class='text-center'>
+                                <!-- <th >Serial</th> -->
+                                <th scope="col">Product title</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <!-- <tr class='text-center'>
+                                <td>{++index}</td>
+                                <td>sdsd</td>
+                                <td>wsdsd</td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                    <div class="form-group mb-3">
+                        <button class='btn btn-success'>Place Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+   function myCreate() {
+    var text1 = document.getElementById('text1').value
+    var text2 = document.getElementById('text2').value
+
+    var table = document.getElementById('my-table')
+    var row =table.insertRow(1);
+
+    var cell1 = row.insertCell(0)
+    var cell2 = row.insertCell(1)
+
+    cell1.innerHTML = text1;
+    cell2.innerHTML = text2;
+
+    text1=''
+    text2=''
+   }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <!-- Add product -->
+    <div class='container mt-5'>
+        <div class='row justify-content-center'>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-success">
+                        <h4 class='text-center'>Add Product</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class='mt-5'>
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label>Product title</label>
+                                            <input type="text" id="title" name='title' class='form-control' required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+
+                                        <div class="form-group mb-3">
+                                            <label>Price</label>
+                                            <input type="text" id="price" name='price' class='form-control' required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <button type='button' value="submit" class='btn btn-success'
+                                        onclick="addProduct()">Add</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- table -->
+    <div class='container py-5'>
+        <div class='row justify-content-center'>
+            <div class="col-md-8">
+                <div>
+                    <h4 class='text-center mb-4'>Product List</h4>
+                    <table class="table table-bordered" id="table">
+                        <thead>
+                            <tr class='text-center'>
+                                <th scope="col">Product title</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <div class="form-group mb-3">
+                        <button class='btn btn-success' onclick="placeOrder()">Place Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        var order = []
+        // console.log(order)
+        function addProduct() {
+            const title = document.getElementById('title').value
+            const price = document.getElementById('price').value
+
+            const table = document.getElementById('table')
+            const row = table.insertRow(1);
+
+            const cell1 = row.insertCell(0)
+            const cell2 = row.insertCell(1)
+
+            cell1.innerHTML = title;
+            cell2.innerHTML = price;
+
+            if (title && price) {
+                // let id = order.length + 1
+                order.push({ title: title, price: price })
+                clearItems()
+            }
+        }
+
+
+        function clearItems() {
+            document.getElementById('title').value = ''
+            document.getElementById('price').value = ''
+
+        }
+
+
+        function placeOrder() {
+            const req = new XMLHttpRequest();
+            req.open('POST', 'http://localhost:8000/api/orders/test');
+            req.setRequestHeader('Content-Type', 'Applicatiom/json');
+            req.send(JSON.stringify(order))
+            req.addEventListener('load', function () {
+                const res = JSON.parse(req.responseText)
+                console.log(res)
+            })
+
+        }
+
+    </script>
+
+</body>
+
+</html>
